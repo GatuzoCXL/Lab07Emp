@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Lista de Eventos{% endblock %}
+
+{% block content %}
+    <h1>Lista de Eventos</h1>
+    {% if eventos %}
+        <ul style="list-style-type: none; padding: 0;">
+        {% for evento in eventos %}
+            <li style="background: #fff; margin-bottom: 10px; padding: 20px; border-radius: 5px;">
+                <h2>{{ evento.titulo }}</h2>
+                <p>Fecha: {{ evento.fecha }}</p>
+                <p>Organizador: {{ evento.organizador.username }}</p>
+                <a href="{% url 'detalle_evento' evento.id %}" class="btn">Ver detalles</a>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No hay eventos disponibles.</p>
+    {% endif %}
+    <a href="{% url 'crear_evento' %}" class="btn">Crear nuevo evento</a>
+{% endblock %}

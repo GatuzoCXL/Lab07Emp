@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}{{ evento.titulo }}{% endblock %}
+
+{% block content %}
+    <div style="background: #fff; padding: 20px; border-radius: 5px;">
+        <h1>{{ evento.titulo }}</h1>
+        <p>Fecha: {{ evento.fecha }}</p>
+        <p>Organizador: {{ evento.organizador.username }}</p>
+        <p>Descripción: {{ evento.descripcion }}</p>
+        <h2>Participantes</h2>
+        {% if evento.registros.all %}
+            <ul>
+            {% for registro in evento.registros.all %}
+                <li>{{ registro.usuario.username }}</li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>Aún no hay participantes registrados.</p>
+        {% endif %}
+        <a href="{% url 'registrar_en_evento' evento.id %}" class="btn">Registrarse en este evento</a>
+    </div>
+{% endblock %}
